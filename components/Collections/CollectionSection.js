@@ -1,14 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+
+//#region React-Icons
 import { CgShapeHexagon } from "react-icons/cg";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
+//#endregion
+
+//#region Swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper';
+
 import 'swiper/css';
-import { EffectFade, Navigation, Pagination } from 'swiper';
+//#endregion
 
 const CollectionSection = ({ CategoryData }) => {
 
     const [activeCategory, setActiveCategory] = useState(CategoryData[0].CategoryName);
-
+    const [cattegoryEffect, setCategoryEffect] = useState(false);
     const CategorySlide = [
         {
             id: 0,
@@ -174,8 +181,12 @@ const CollectionSection = ({ CategoryData }) => {
 
     ]
 
-    console.log(CategoryData);
-    console.log(CategorySlide.filter((e) => e.CategoryName == activeCategory));
+    useEffect(() => {
+        setCategoryEffect(true);
+        setTimeout(() => {
+            setCategoryEffect(false);
+        }, 400);
+    }, [activeCategory]);
 
     return (
         <section className="py-14">
@@ -188,14 +199,33 @@ const CollectionSection = ({ CategoryData }) => {
                 <div className='flex items-center'>
                     <Swiper
                         spaceBetween={50}
-                        slidesPerView={7}
+                        slidesPerView={2}
+                        breakpoints={
+                            {
+                                640: {
+                                    slidesPerView: 3
+                                },
+                                1024: {
+                                    slidesPerView: 4
+                                },
+                                1400: {
+                                    slidesPerView: 5
+                                },
+                                1600: {
+                                    slidesPerView: 6
+                                },
+                                1900: {
+                                    slidesPerView: 7
+                                }
+                            }
+                        }
                         navigation={{ nextEl: ".collection-slide-next", prevEl: ".collection-slide-prev" }}
                         modules={[Navigation]}
                     >
                         {
                             CategoryData && CategoryData.map((data, index) => (
-                                <SwiperSlide>
-                                    <div onClick={() => setActiveCategory(data.CategoryName)} className={`p-3 cursor-pointer py-16 flex text-xl font-medium text-center items-center flex-col gap-5 ${activeCategory === data.CategoryName ? "bg-[#533333]" : "text-black"} rounded-[45px] text-white`}>
+                                <SwiperSlide key={index}>
+                                    <div onClick={() => setActiveCategory(data.CategoryName)} className={`p-3 cursor-pointer py-16 flex text-xl font-medium text-center items-center flex-col gap-5 ${activeCategory === data.CategoryName ? "bg-[#533333] text-white" : "text-black"} transition-colors duration-500 rounded-[45px] `}>
                                         <CgShapeHexagon size={56} />
                                         <p>{data.CategoryName}</p>
                                     </div>
@@ -208,9 +238,7 @@ const CollectionSection = ({ CategoryData }) => {
                         <button className='collection-slide-prev'><BiChevronLeft size={32} /></button>
                     </div>
                 </div>
-                <div className='py-8'>
-
-
+                <div className={`py-8 ${cattegoryEffect ? 'opacity-0' : 'opacity-100 transition-opacity ease-in-out duration-500'} `}>
 
                     {
                         CategoryData && CategoryData.map((data, index) => (
@@ -238,9 +266,10 @@ const CollectionSection = ({ CategoryData }) => {
                                                         <button className="custom-next rounded-full border border-black w-24 h-24 flex items-center justify-center" >
                                                             <BiChevronRight />
                                                         </button>
-                                                        {index}
-                                                        <div className="absolute p-5 -bottom-40 -left-60">
-                                                            <span className="text-[6em] text-[#f2ecdc]"></span>
+                                                        <div className="absolute p-5 -bottom-40 -left-60 z-30">
+                                                            <span className="text-[6em] text-[#f2ecdc] overflow" >
+                                                                {index}
+                                                            </span>
                                                         </div>
                                                     </div>
                                                     <div className="flex flex-col justify-between gap-y-8">
