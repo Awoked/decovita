@@ -29,7 +29,6 @@ const HeroSection = ({ SliderData }) => {
                     <span className='w-0.5 h-32 bg-cyan-500 mt-5'></span>
                 </button>
             </div>
-
             <Swiper
                 pagination={{
                     el: ".swiper-pagination",
