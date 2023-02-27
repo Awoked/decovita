@@ -4,6 +4,9 @@ import Image from 'next/image'
 //#region Components
 import CollectionSection from '@/components/Collections/CollectionSection';
 import HeroSection from '@/components/Hero/HeroSection';
+import AboutSection from '@/components/About/AboutSection';
+import AboutFullSection from '@/components/About/AboutFullSection';
+import NewCollectionsSection from '@/components/Collections/NewCollectionsSection';
 //#endregion
 
 export default function Home({ SliderData, CategoryData }) {
@@ -21,8 +24,10 @@ export default function Home({ SliderData, CategoryData }) {
       <main>
 
         <HeroSection SliderData={SliderData} />
-
         <CollectionSection CategoryData={CategoryData} />
+        <AboutSection />
+        <AboutFullSection />
+        <NewCollectionsSection />
       </main >
     </>
   )

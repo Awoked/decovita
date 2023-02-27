@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 //#region React-Icons
-import { CgShapeHexagon } from "react-icons/cg";
+import { CgArrowRight, CgShapeHexagon } from "react-icons/cg";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 //#endregion
 
@@ -10,6 +10,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper';
 
 import 'swiper/css';
+import Link from 'next/link';
 //#endregion
 
 const CollectionSection = ({ CategoryData }) => {
@@ -238,7 +239,9 @@ const CollectionSection = ({ CategoryData }) => {
                         <button className='collection-slide-prev'><BiChevronLeft size={32} /></button>
                     </div>
                 </div>
-                <div className={`py-8 ${cattegoryEffect ? 'opacity-0' : 'opacity-100 transition-opacity ease-in-out duration-500'} `}>
+            </div>
+            <div className={`py-8 bg-[#fffbf0] ${cattegoryEffect ? 'opacity-0' : 'opacity-100 transition-opacity ease-in-out duration-500'} `}>
+                <div className="container mx-auto">
 
                     {
                         CategoryData && CategoryData.map((data, index) => (
@@ -255,19 +258,19 @@ const CollectionSection = ({ CategoryData }) => {
                                     {
                                         (CategorySlide.filter((e) => e.CategoryName == data.CategoryName)).map((slideData, index) => (
                                             <SwiperSlide key={index}>
-                                                <div className="flex justify-between ">
+                                                <div className="flex flex-col gap-y-4 md:flex-row justify-between relative">
                                                     <div>
                                                         <img src={slideData.leftImageURL} alt="" />
                                                     </div>
-                                                    <div className="flex flex-col gap-10 p-5 items-center text-5xl relative">
+                                                    <div className="flex flex-col gap-10 p-5 items-center text-5xl relative max-md:absolute max-md:right-0">
                                                         <button className="custom-prev rounded-full border border-black w-24 h-24 flex items-center justify-center" >
                                                             <BiChevronLeft />
                                                         </button>
                                                         <button className="custom-next rounded-full border border-black w-24 h-24 flex items-center justify-center" >
                                                             <BiChevronRight />
                                                         </button>
-                                                        <div className="absolute p-5 -bottom-40 -left-60 z-30">
-                                                            <span className="text-[6em] text-[#f2ecdc] overflow" >
+                                                        <div className="absolute p-5 bottom-10 -left-60 z-30">
+                                                            <span className="text-[6em] text-[#f2ecdc]" >
                                                                 {index}
                                                             </span>
                                                         </div>
@@ -277,8 +280,11 @@ const CollectionSection = ({ CategoryData }) => {
                                                             {slideData.Paragraph}
                                                         </p>
 
-                                                        <div className="bg-red-300 h-full w-full">
-                                                            <img src={slideData.rightImageURL} className="h-full object-cover" alt="" />
+                                                        <div className="bg-red-300 group h-full w-full relative overflow-hidden before:absolute before:left-0 before:bottom-0 before:z-10 before:h-24 before:w-full before:bg-[#9f9d98] after:absolute after:right-0 after:bottom-0 after:h-full after:w-24 after:bg-[#9f9d98] ">
+                                                            <img src={slideData.rightImageURL} className="h-full object-cover group-hover:scale-105 z-0 relative transition-transform duration-300" alt="" />
+                                                            <Link href={"/"} className='absolute z-10 left-10 bottom-10 text-white font-bold border-b-2 border-white pb-1 text-xl'>
+                                                                Ürünü İncele
+                                                            </Link>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -286,15 +292,19 @@ const CollectionSection = ({ CategoryData }) => {
                                         ))
 
                                     }
-
                                 </Swiper>
+                                <div className='flex justify-end py-1'>
+                                    <Link href={"/"} className="flex items-center gap-2 text-lg text-[#333333]">
+                                        Tümünü Gör <CgArrowRight className='mt-1' />
+                                    </Link>
+                                </div>
                             </>
                         ))
                     }
 
                 </div>
-
             </div>
+
         </section>
     )
 }
