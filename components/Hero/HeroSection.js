@@ -16,7 +16,22 @@ import { ImFacebook, ImInstagram, ImLinkedin, ImLinkedin2, ImYoutube } from "rea
 import { CgChevronRight } from 'react-icons/cg';
 //#endregion
 
-const HeroSection = ({ SliderData }) => {
+const HeroSection = () => {
+
+    const SliderData = [
+        {
+            id: 0,
+            imgURL: "/slider/slider-bg.png"
+        },
+        {
+            id: 1,
+            imgURL: "/slider/slider-bg.png"
+        },
+        {
+            id: 2,
+            imgURL: "/slider/slider-bg.png"
+        },
+    ]
     const ScrollDown = () => {
         window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
     }

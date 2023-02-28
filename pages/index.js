@@ -9,9 +9,9 @@ import AboutFullSection from '@/components/About/AboutFullSection';
 import NewCollectionsSection from '@/components/Collections/NewCollectionsSection';
 //#endregion
 
-export default function Home({ SliderData, CategoryData }) {
+export default function Home() {
 
-  
+
 
   return (
     <>
@@ -23,8 +23,8 @@ export default function Home({ SliderData, CategoryData }) {
       </Head>
       <main>
 
-        <HeroSection SliderData={SliderData} />
-        <CollectionSection CategoryData={CategoryData} />
+        <HeroSection />
+        <CollectionSection />
         <AboutSection />
         <AboutFullSection />
         <NewCollectionsSection />
@@ -34,18 +34,3 @@ export default function Home({ SliderData, CategoryData }) {
 }
 
 
-export const getServerSideProps = async (context) => {
-
-  const SliderRes = await fetch(process.env.URL + '/api/slider');
-  const SliderData = await SliderRes.json();
-
-  const CategoryRes = await fetch(process.env.URL + "/api/categories");
-  const CategoryData = await CategoryRes.json();
-
-  return {
-    props: {
-      SliderData,
-      CategoryData
-    }
-  }
-}

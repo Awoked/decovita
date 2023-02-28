@@ -13,7 +13,58 @@ import 'swiper/css';
 import Link from 'next/link';
 //#endregion
 
-const CollectionSection = ({ CategoryData }) => {
+const CollectionSection = ( ) => {
+
+    const CategoryData = [
+        {
+            id: 0,
+            CategoryName: "Artsy",
+            leftImageURL: "https://picsum.photos/300/500",
+            rightImageURL: "https://picsum.photos/800/400"
+        },
+        {
+            id: 1,
+            CategoryName: "Essentials",
+            leftImageURL: "https://picsum.photos/300/500",
+            rightImageURL: "https://picsum.photos/800/400"
+        },
+        {
+            id: 2,
+            CategoryName: "Modest Luxury",
+            leftImageURL: "https://picsum.photos/300/500",
+            rightImageURL: "https://picsum.photos/800/400"
+        },
+        {
+            id: 3,
+            CategoryName: "Onyx",
+            leftImageURL: "https://picsum.photos/300/500",
+            rightImageURL: "https://picsum.photos/800/400"
+        },
+        {
+            id: 4,
+            CategoryName: "Outdoor",
+            leftImageURL: "https://picsum.photos/300/500",
+            rightImageURL: "https://picsum.photos/800/400"
+        },
+        {
+            id: 5,
+            CategoryName: "Stylish",
+            leftImageURL: "https://picsum.photos/300/500",
+            rightImageURL: "https://picsum.photos/800/400"
+        },
+        {
+            id: 6,
+            CategoryName: "The Ultimate Black  White",
+            leftImageURL: "https://picsum.photos/300/500",
+            rightImageURL: "https://picsum.photos/800/400"
+        },
+        {
+            id: 7,
+            CategoryName: "category 9",
+            leftImageURL: "https://picsum.photos/300/500",
+            rightImageURL: "https://picsum.photos/800/400"
+        },
+    ]
 
     const [activeCategory, setActiveCategory] = useState(CategoryData[0].CategoryName);
     const [cattegoryEffect, setCategoryEffect] = useState(false);
@@ -182,6 +233,8 @@ const CollectionSection = ({ CategoryData }) => {
 
     ]
 
+    
+
     useEffect(() => {
         setCategoryEffect(true);
         setTimeout(() => {
@@ -247,8 +300,9 @@ const CollectionSection = ({ CategoryData }) => {
                         CategoryData && CategoryData.map((data, index) => (
                             data.CategoryName === activeCategory &&
                             <>
-                                <h3 className='py-8 text-6xl '>{data.CategoryName}</h3>
+                                <h3 className='py-8 text-6xl'>{data.CategoryName}</h3>
                                 <Swiper
+                                    key={index}
                                     spaceBetween={50}
                                     slidesPerView={1}
                                     speed={1000}
